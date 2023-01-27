@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator()
 export const StackNavigator = ({navigation}) => {
     return (
         <Stack.Navigator
-            initialRouteName='Test Page'
+            initialRouteName='Search'
             screenOptions={{
                     headerTintColor: '#552244',
                     headerStyle: {
