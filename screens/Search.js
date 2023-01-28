@@ -33,20 +33,21 @@ export const Search = ({navigation}) => {
     // const renderItem = (obj) => <MovieCard {...obj.item}/>
 
     return (
-        <ScrollView >
+        <ScrollView>
+            <View style={{alignItems: 'center'}}>
+                <Text style={{fontSize: 22}}>Search for Movies:</Text>                
+                <View style={{flexDirection: 'row'}}>
+                    <TextInput style={styles.textInput} placeholder='What do you want to watch?' onChangeText={updateSearchInput}></TextInput>
+                    <Pressable style={styles.iconBox} onPress={handleSearch}>
+                        <Ionicon name='search-sharp' size={30}/>
+                    </Pressable>
+                </View> 
             {searchData && searchData.map((item, key) => (
                 <MovieCardBasic movieData={item} />
             ))}
-            <MovieCardBasic movieData={searchData[0] ? searchData[0] : []} />
+            {/* <MovieCardBasic movieData={searchData[0] ? searchData[0] : []} /> */}
             {/* <Text>{searchData[0].Title}</Text> */}
-            <View style={{alignItems: 'center'}}>
-            <Text style={{fontSize: 22}}>Search for Movies:</Text>                
-            <View style={{flexDirection: 'row'}}>
-                <TextInput style={styles.textInput} placeholder='What do you want to watch?' onChangeText={updateSearchInput}></TextInput>
-                <Pressable style={styles.iconBox} onPress={handleSearch}>
-                    <Ionicon name='search-sharp' size={30}/>
-                </Pressable>
-            </View>  
+ 
             {/* <Text>{searchData.json()}</Text>  */}
             {/* <SectionList 
                 sections={{
