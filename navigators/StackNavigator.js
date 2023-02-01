@@ -4,6 +4,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import { TestPage } from '../screens/TestPage'
 import { Search } from '../screens/Search'
+import { MovieCardDetail } from '../components/MovieCardDetail'
+import { Poster } from '../screens/Poster'
 
 const Stack = createNativeStackNavigator()
 
@@ -41,6 +43,14 @@ export const StackNavigator = ({navigation}) => {
                     </View>
                     )
                 }}
+            />
+            <Stack.Screen 
+                name='Details'
+                component={MovieCardDetail}
+            />
+            <Stack.Screen 
+                name='Poster'
+                component={Poster}
             />
         </Stack.Navigator>
     )

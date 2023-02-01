@@ -9,26 +9,22 @@ import { MovieCardBasic } from '../components/MovieCardBasic';
 export const Search = ({navigation}) => {
     const [searchInputVal, setSearchInputVal] = useState('')
     const [searchData, setSearchData] = useState([])
-
-    const optional = '?s=star wars&type=movie'
-
-    // async function getApiData(optional){
-    //     let data = await apiCall(optional)
-    //     console.log(data)
-    // }
     
-
+    const optional = `?s=${searchInputVal ? searchInputVal : ''}&type=movie`
+   
     const updateSearchInput = (inputVal) => {
         setSearchInputVal(inputVal)
     }
 
     async function handleSearch() {
-        console.log(`Searching for ${searchInputVal}`)
-        const data = await apiCall(optional)
-        setSearchData(data)
-        console.log("just after set ", data[0])
+        try {
+            console.log(`Searching for ${searchInputVal}`)
+            const data = await apiCall(optional)
+            setSearchData(data.Search)
+            // console.log("just after set ", data.Search)
+        } catch {(err) => console.log(err)}
     }
-    useEffect(() => console.log("useEffect ", searchData), [searchData])
+    // useEffect(() => console.log("useEffect ", searchData ? searchData[0] : "none"), [searchData])
 
     // const renderItem = (obj) => <MovieCard {...obj.item}/>
 
@@ -43,7 +39,12 @@ export const Search = ({navigation}) => {
                     </Pressable>
                 </View> 
             {searchData && searchData.map((item, key) => (
-                <MovieCardBasic movieData={item} />
+                <MovieCardBasic
+                    key={key}
+                    movieData={item}
+                    // onPress={() => navigation.navigate('Details')}
+                    navigation={{navigation}}
+                />
             ))}
             {/* <MovieCardBasic movieData={searchData[0] ? searchData[0] : []} /> */}
             {/* <Text>{searchData[0].Title}</Text> */}
@@ -56,12 +57,19 @@ export const Search = ({navigation}) => {
                 }}
                 renderItem={renderItem}
             />         */}
-            <MovieCardDetail />
+            {/* <MovieCardDetail navigation={navigation}/> */}
+            <View style={{height: 10}}></View>
             <Button
                 title='Back To Test Page'
                 color='#552244'
                 onPress={() => navigation.navigate('Test Page')}
             />
+            <View style={{height: 10}}></View>
+            {/* <Button
+                title='Movie Details'
+                color='#552244'
+                onPress={() => navigation.navigate('Details')}
+            /> */}
             </View>
         </ScrollView>
 
