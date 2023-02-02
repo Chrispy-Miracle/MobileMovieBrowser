@@ -1,4 +1,3 @@
-
 const BASE_URL = 'http://www.omdbapi.com/'
 const API_KEY = '38a8b9a9'
 

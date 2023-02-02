@@ -1,35 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { View, ScrollView, Text, TextInput, Button, StyleSheet, Pressable} from 'react-native'
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
-import { MovieCardDetail } from '../components/MovieCardDetail';
 import { apiCall } from '../apiCall';
 import { MovieCardBasic } from '../components/MovieCardBasic';
 
 export const Search = ({navigation}) => {
     const [searchInputVal, setSearchInputVal] = useState('')
     const [searchData, setSearchData] = useState([])
+    const [page, setPage] = useState(1)
     
-    const optional = `?s=${searchInputVal ? searchInputVal : ''}&type=movie`
+    const optional = `?s=${searchInputVal ? searchInputVal : ''}&page=${page}`
    
+    const scrollRef = useRef()
+
     const updateSearchInput = (inputVal) => {
         setSearchInputVal(inputVal)
+        
     }
 
     async function handleSearch() {
         try {
-            console.log(`Searching for ${searchInputVal}`)
+            console.log(`Searching for ${optional}`)
             const data = await apiCall(optional)
             setSearchData(data.Search)
-            // console.log("just after set ", data.Search)
         } catch {(err) => console.log(err)}
     }
-    // useEffect(() => console.log("useEffect ", searchData ? searchData[0] : "none"), [searchData])
 
+    const scrollToTop = () => {
+        scrollRef.current?.scrollTo({
+            y: 0,
+            animated: true,
+          });        
+    }
+
+    const nextPage = () => {
+        setPage(page + 1)
+        handleSearch()
+        scrollToTop()
+    }
+    const prevPage = () => {
+        setPage(page - 1)
+        handleSearch()
+        scrollToTop()
+    }
+    // Potentially redo as a Section List using this:
     // const renderItem = (obj) => <MovieCard {...obj.item}/>
 
     return (
-        <ScrollView>
+        <ScrollView ref={scrollRef}>
             <View style={{alignItems: 'center'}}>
                 <Text style={{fontSize: 22}}>Search for Movies:</Text>                
                 <View style={{flexDirection: 'row'}}>
@@ -38,41 +57,44 @@ export const Search = ({navigation}) => {
                         <Ionicon name='search-sharp' size={30}/>
                     </Pressable>
                 </View> 
-            {searchData && searchData.map((item, key) => (
+                {searchData && searchData.map((item, key) => (
                 <MovieCardBasic
                     key={key}
                     movieData={item}
-                    // onPress={() => navigation.navigate('Details')}
                     navigation={{navigation}}
                 />
-            ))}
-            {/* <MovieCardBasic movieData={searchData[0] ? searchData[0] : []} /> */}
-            {/* <Text>{searchData[0].Title}</Text> */}
- 
-            {/* <Text>{searchData.json()}</Text>  */}
-            {/* <SectionList 
-                sections={{
-                    title: "Movies",
-                    data: {movie}
-                }}
-                renderItem={renderItem}
-            />         */}
-            {/* <MovieCardDetail navigation={navigation}/> */}
-            <View style={{height: 10}}></View>
-            <Button
-                title='Back To Test Page'
-                color='#552244'
-                onPress={() => navigation.navigate('Test Page')}
-            />
-            <View style={{height: 10}}></View>
-            {/* <Button
-                title='Movie Details'
-                color='#552244'
-                onPress={() => navigation.navigate('Details')}
-            /> */}
+                ))}
+                {/* <SectionList 
+                    sections={{
+                        title: "Movies",
+                        data: {movie}
+                    }}
+                    renderItem={renderItem}
+                /> */}
+                <View style={{height: 10}}></View>
+                <View style={{flexDirection: 'row'}}>
+                    <Button
+                        title='Prev Page'
+                        color='#552244'
+                        onPress={prevPage}
+                    />
+                    <View style={{width: 10}}></View>
+                    <Button
+                        title='Next Page'
+                        color='#552244'
+                        onPress={nextPage}
+                    />                    
+                </View>
+                <View style={{height: 10}}></View>
+                <View style={{height: 10}}></View>
+                <Button
+                    title='Back To Test Page'
+                    color='#552244'
+                    onPress={() => navigation.navigate('Test Page')}
+                />
+                <View style={{height: 10}}></View>
             </View>
         </ScrollView>
-
     )
 }
 

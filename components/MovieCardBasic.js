@@ -4,17 +4,11 @@ import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 export const MovieCardBasic = (props) => {
     const navigation = useNavigation();
     
-    // const goToDetailsCard = (navigation) => {
-    //     console.log(`Go to ${props.movieData.imdbID}`)
-    //     navigation.navigate('Details')
-    // }
-    // console.log("from basic card: ", props.movieData.imdbID)
-
     return (
         <Pressable 
             style={styles.movieCardBasic}
-            onPress={()=> navigation.navigate('Details', { id: props.movieData.imdbID})}>
-            
+            onPress={()=> navigation.navigate('Details', { id: props.movieData.imdbID})}
+        >
             <View style={{flexDirection: 'row'}}>
                 <Image style={styles.poster} source={{uri: props.movieData.Poster}} />
                 <View style={{alignItems: 'center'}}>
@@ -27,11 +21,8 @@ export const MovieCardBasic = (props) => {
                         <Text style={{fontWeight: 'bold'}}>imdbID:  </Text>
                         <Text>{props.movieData.imdbID}</Text>
                     </View>
-                    
                 </View>
-            </View>
-
-            
+            </View>   
         </Pressable>
     )
 }
