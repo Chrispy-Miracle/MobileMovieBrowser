@@ -3,7 +3,9 @@ import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 
 export const MovieCardBasic = (props) => {
     const navigation = useNavigation();
-    
+    const captialize = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
     return (
         <Pressable 
             style={styles.movieCardBasic}
@@ -14,7 +16,7 @@ export const MovieCardBasic = (props) => {
                 <View style={{alignItems: 'center'}}>
                     <Text style={styles.title}>{props.movieData.Title}</Text>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style={{fontWeight: 'bold'}}>{props.movieData.Type}:  </Text>
+                        <Text style={{fontWeight: 'bold'}}>{captialize(props.movieData.Type)}:  </Text>
                         <Text style={{fontSize: 20}}>{props.movieData.Year}</Text>
                     </View>
                     <View style={{flexDirection: 'row', marginTop: 20}}>

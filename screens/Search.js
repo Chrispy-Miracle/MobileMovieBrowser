@@ -4,19 +4,22 @@ import Ionicon from 'react-native-vector-icons/Ionicons'
 
 import { apiCall } from '../apiCall';
 import { MovieCardBasic } from '../components/MovieCardBasic';
+import { Selector } from '../components/Selector';
 
 export const Search = ({navigation}) => {
     const [searchInputVal, setSearchInputVal] = useState('')
     const [searchData, setSearchData] = useState([])
     const [page, setPage] = useState(1)
+    const [optionToggle, setOptionToggle] = useState(false)
+    const [mediaType, setMediaType] = useState('')
+    const [year, setYear] = useState('')
     
-    const optional = `?s=${searchInputVal ? searchInputVal : ''}&page=${page}`
+    const optional = `?s=${searchInputVal ? searchInputVal : ''}&page=${page}${mediaType}${year}`
    
     const scrollRef = useRef()
 
     const updateSearchInput = (inputVal) => {
-        setSearchInputVal(inputVal)
-        
+        setSearchInputVal(inputVal)  
     }
 
     async function handleSearch() {
@@ -46,10 +49,39 @@ export const Search = ({navigation}) => {
     }
     // Potentially redo as a Section List using this:
     // const renderItem = (obj) => <MovieCard {...obj.item}/>
+    const typeOfMedia = ["Movie", "Series", "Episode", "Game", "All Media"]
+    const updateMediaType = (media) => {
+        console.log("mediaChange:", media)
+        media === "All Media" ? setMediaType("") : setMediaType(`&type=${media.toLowerCase()}`)
+        console.log("mediaType:", mediaType)
+    }
+    const years = () => {
+        var max = new Date().getFullYear()
+        var min = max - 131
+        var years = ['All Years']
+      
+        for (var i = max; i >= min; i--) {
+          years.push(i .toString())
+        }
+        return years
+    }
+    const updateYear = (yearInput) => {
+        yearInput === "All Years" ? setYear('') : setYear(`&y=${yearInput}`)
+    }
 
     return (
         <ScrollView ref={scrollRef}>
             <View style={{alignItems: 'center'}}>
+                <Button 
+                    title={optionToggle ? "Hide Options" : "More Options"}
+                    color="#777"
+                    onPress={() => setOptionToggle(!optionToggle)}
+                />
+                {optionToggle && 
+                <View style={{flexDirection: 'row', borderWidth: 1, borderColor: '#555'}}>
+                    <Selector data={typeOfMedia} name='Media Type' setFilter={updateMediaType} />
+                    <Selector data={years()} name='Year' setFilter={updateYear} />
+                </View>}
                 <Text style={{fontSize: 22}}>Search for Movies:</Text>                
                 <View style={{flexDirection: 'row'}}>
                     <TextInput style={styles.textInput} placeholder='What do you want to watch?' onChangeText={updateSearchInput}></TextInput>
@@ -72,6 +104,7 @@ export const Search = ({navigation}) => {
                     renderItem={renderItem}
                 /> */}
                 <View style={{height: 10}}></View>
+                {searchData && 
                 <View style={{flexDirection: 'row'}}>
                     <Button
                         title='Prev Page'
@@ -84,7 +117,7 @@ export const Search = ({navigation}) => {
                         color='#552244'
                         onPress={nextPage}
                     />                    
-                </View>
+                </View>}
                 <View style={{height: 10}}></View>
                 <View style={{height: 10}}></View>
                 <Button

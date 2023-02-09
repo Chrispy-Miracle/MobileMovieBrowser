@@ -6,6 +6,8 @@ import { TestPage } from '../screens/TestPage'
 import { Search } from '../screens/Search'
 import { MovieCardDetail } from '../components/MovieCardDetail'
 import { Poster } from '../screens/Poster'
+import { MyMap } from '../screens/MyMap'
+import { Contacts } from '../screens/Contacts'
 
 const Stack = createNativeStackNavigator()
 
@@ -51,6 +53,14 @@ export const StackNavigator = ({navigation}) => {
             <Stack.Screen 
                 name='Poster'
                 component={Poster}
+            />
+            <Stack.Screen 
+                name='MyMap'
+                component={MyMap}
+            />
+            <Stack.Screen 
+                name='Contacts'
+                component={Contacts}
             />
         </Stack.Navigator>
     )
