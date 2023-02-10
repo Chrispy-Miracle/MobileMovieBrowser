@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text } from 'react-native'
 import  { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -8,13 +8,16 @@ import { MovieCardDetail } from '../components/MovieCardDetail'
 import { Poster } from '../screens/Poster'
 import { MyMap } from '../screens/MyMap'
 import { Contacts } from '../screens/Contacts'
+import  { Compass } from '../screens/Compass'
+import { UpFinder } from '../screens/UpFinder'
+
 
 const Stack = createNativeStackNavigator()
 
 export const StackNavigator = ({navigation}) => {
     return (
         <Stack.Navigator
-            initialRouteName='Search'
+            initialRouteName='Test Page'
             screenOptions={{
                     headerTintColor: '#552244',
                     headerStyle: {
@@ -62,6 +65,14 @@ export const StackNavigator = ({navigation}) => {
                 name='Contacts'
                 component={Contacts}
             />
+            <Stack.Screen 
+                name='Compass'
+                component={Compass}
+            />
+            <Stack.Screen 
+                name='UpFinder'
+                component={UpFinder}
+            />                        
         </Stack.Navigator>
     )
 }

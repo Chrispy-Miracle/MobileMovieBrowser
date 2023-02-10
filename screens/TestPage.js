@@ -41,11 +41,20 @@ export const TestPage = ({navigation}) => {
                 onPress={logIt}
             /> */}
             {/* <Text>{fetchedData}</Text> */}
-            <Button title="Contacts" color='#552244' onPress={() => navigation.navigate('Contacts')} />
-            <View style={{height: 10}} ></View>
-            <Button title="MyMap" color='#552244' onPress={() => navigation.navigate('MyMap')} />
-            <View style={{height: 10}} ></View>
-            <Button title='Search' color='#552244' onPress={() => navigation.navigate('Search')} />
+            <View style={{flexDirection: 'row'}}>
+                <Button title="Contacts" color='#552244' onPress={() => navigation.navigate('Contacts')} />
+                <View style={{width: 10}} ></View>
+                <Button title="MyMap" color='#552244' onPress={() => navigation.navigate('MyMap')} />
+                <View style={{width: 10}} ></View>
+                <Button title='Search' color='#552244' onPress={() => navigation.navigate('Search')} />
+            </View>
+            <View style={{flexDirection: 'row', padding: 10}}>
+                <Button title="Compass" color='#552244' onPress={() => navigation.navigate('Compass')} />
+                <View style={{width: 10}} ></View>
+                <Button title="UpFinder" color='#552244' onPress={() => navigation.navigate('UpFinder')} />
+                <View style={{width: 10}} ></View>
+                <Button title='Search' color='#552244' onPress={() => navigation.navigate('Search')} />
+            </View>
             <Text>Mobile Movie Browser</Text>
             <Text>{movie.Title}</Text>
             <Image style={{height: 385, width: 252}} source={{uri: 'https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg'}} />
