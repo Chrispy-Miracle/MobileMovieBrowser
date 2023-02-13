@@ -10,6 +10,8 @@ import { MyMap } from '../screens/MyMap'
 import { Contacts } from '../screens/Contacts'
 import  { Compass } from '../screens/Compass'
 import { UpFinder } from '../screens/UpFinder'
+import { ExpoVideo } from '../screens/ExpoVideo'
+import { Camera } from '../screens/Camera'
 
 
 const Stack = createNativeStackNavigator()
@@ -72,7 +74,15 @@ export const StackNavigator = ({navigation}) => {
             <Stack.Screen 
                 name='UpFinder'
                 component={UpFinder}
-            />                        
+            />
+            <Stack.Screen 
+                name='ExpoVideo'
+                component={ExpoVideo}
+            /> 
+            <Stack.Screen
+                name="Camera"
+                component={Camera}
+            />                   
         </Stack.Navigator>
     )
 }
