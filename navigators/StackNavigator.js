@@ -12,6 +12,7 @@ import  { Compass } from '../screens/Compass'
 import { UpFinder } from '../screens/UpFinder'
 import { ExpoVideo } from '../screens/ExpoVideo'
 import { Camera } from '../screens/Camera'
+import { Redux } from '../screens/Redux'
 
 
 const Stack = createNativeStackNavigator()
@@ -82,7 +83,11 @@ export const StackNavigator = ({navigation}) => {
             <Stack.Screen
                 name="Camera"
                 component={Camera}
-            />                   
+            />
+            <Stack.Screen
+                name="Redux"
+                component={Redux}
+            />                  
         </Stack.Navigator>
     )
 }

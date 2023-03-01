@@ -56,9 +56,9 @@ export const TestPage = ({navigation}) => {
                 <Button title='ExpoVideo' color='#552244' onPress={() => navigation.navigate('ExpoVideo')} />
             </View>
             <View style={{flexDirection: 'row', padding: 10}}>
-                <Button title="1" color='#552244' onPress={() => navigation.navigate('Camera')} />
+                <Button title="Camera" color='#552244' onPress={() => navigation.navigate('Camera')} />
                 <View style={{width: 10}} ></View>
-                <Button title="2" color='#552244' onPress={() => navigation.navigate('Camera')} />
+                <Button title="Redux" color='#552244' onPress={() => navigation.navigate('Redux')} />
                 <View style={{width: 10}} ></View>
                 <Button title='3' color='#552244' onPress={() => navigation.navigate('Camera')} />
             </View>            
